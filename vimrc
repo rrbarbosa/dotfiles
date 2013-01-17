@@ -140,3 +140,11 @@ function! StripTrailingWhitespace()
   endif
   normal `Z
 endfunction
+
+" Grep TODO tags
+function! TodoGrep()
+  execute "grep TODO -r %"
+  execute "cw"
+endfunction
+
+command Todo call TodoGrep()

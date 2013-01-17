@@ -16,6 +16,9 @@ setlocal spell
 "Add vim-surrond for latex command, using char c
 let g:surround_{char2nr('c')} = "\\\1command\1{\r}"
 
+"Some text expansions
+iab todo %TODO -
+
 " Some functions copyied from vim-latex
 let g:Tex_SmartKeyQuote = 1
 let g:Tex_SmartKeyBS = 1
