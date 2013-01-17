@@ -1,0 +1,43 @@
+# Be 8 bit clean.
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# allow the use of the Delete/Insert keys
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
+# mappings for "page up" and "page down"
+# to step to the beginning/end
+# of the history
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Vi mode
+set editing-mode emacs
+#set keymap vi
+
+$if mode=vi
+#set keymap vi-command
+# these are for vi-command mode
+#"\e[A": history-search-backward
+#"\e[B": history-search-forward
+set keymap vi-insert
+# these are for vi-insert mode
+"\ef": forward-word
+"\eb": backward-word
+$endif
+
+# allow the use of the Home/End keys
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# Case-insensitive completion
+set completion-ignore-case on
+
+"\e[1;5D": backward-word 
+"\e[1;5C": forward-word 
+
