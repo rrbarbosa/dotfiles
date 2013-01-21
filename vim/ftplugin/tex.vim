@@ -16,8 +16,11 @@ setlocal spell
 "Add vim-surrond for latex command, using char c
 let g:surround_{char2nr('c')} = "\\\1command\1{\r}"
 
+"Make ctrlp work play nice with my latex folders
+let g:ctrlp_root_markers = ['*.latexmain']
+
 "Some text expansions
-iab todo %TODO -
+iab TODO %TODO -
 
 " Some functions copyied from vim-latex
 let g:Tex_SmartKeyQuote = 1

@@ -3,10 +3,16 @@ filetype off
 call pathogen#infect()
 call pathogen#helptags()
 
+"Attempt to replace <esc> with jk
+inoremap jk <esc>
+cnoremap jk <c-c>
+
+"I will never use vim with this type of files
+set wildignore+=*.so,*.swp,*.zip,*.aux,*.pdf
+
 filetype indent plugin on
 
 set nocompatible   " Disable vi-compatibility
-"set linebreak
 "set hidden
 set number
 syntax on
@@ -148,3 +154,8 @@ function! TodoGrep()
 endfunction
 
 command Todo call TodoGrep()
+
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("e")': [],
+  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+  \ }
