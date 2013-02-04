@@ -1,7 +1,12 @@
 filetype off
 "script manager DO NOT remove
-call pathogen#infect()
-call pathogen#helptags()
+execute pathogen#infect('~/.vim/bundle/')
+"Seperate gui plugins from console plugins. 
+"Cannot add "infect" to gvimrc, does not work!
+if has("gui_running")
+		execute pathogen#infect('~/.vim/gbundle/')
+endif
+execute pathogen#helptags()
 
 "Attempt to replace <esc> with jk
 inoremap jk <esc>
