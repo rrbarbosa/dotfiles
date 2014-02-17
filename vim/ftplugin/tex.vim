@@ -1,9 +1,9 @@
-map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-		\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
+"map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+		"\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
 
 " use sync tex
-"let g:LatexBox_latexmk_options = '-synctex=1'
-let g:LatexBox_viewer = 'open -a /Applications/Skim.app/' 
+let g:LatexBox_latexmk_options = '-synctex=1'
+let g:LatexBox_viewer = '~/bin/evince' 
 " enable folding...
 let g:LatexBox_Folding = 1
 " ... but do not fold the preamble
