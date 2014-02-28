@@ -1,4 +1,4 @@
-Dotfiles [1]
+Dotfiles [^1]
 ========
 This repository includes all of my custom dotfiles.  They should be cloned to
 your home directory so that the path is `~/dotfiles/`.  The included setup
@@ -24,7 +24,7 @@ So, to recap, the install script will:
 4. Check to see if `zsh` is installed, if it isn't, try to install it.
 5. If zsh is installed, run a `chsh -s` to set it as the default shell.
 
-[1] https://github.com/michaeljsmalley/dotfiles "Shamelessly copied from  michaeljsmalley"
+[^1] Shamelessly copied from <https://github.com/michaeljsmalley/dotfiles>
 
 Installation
 ------------
