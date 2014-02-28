@@ -1,176 +1,74 @@
-filetype off
-"script manager DO NOT remove
-execute pathogen#infect('~/.vim/bundle/')
-"Seperate gui plugins from console plugins.
-"Cannot add "infect" to gvimrc, does not work!
-if has("gui_running")
-	let g:airline_powerline_fonts = 1
-	execute pathogen#infect('~/.vim/gbundle/')
-endif
-execute pathogen#helptags()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Filename: .vimrc                                                         "
+" Maintainer: Michael J. Smalley <michaeljsmalley@gmail.com>                 "
+"        URL: http://github.com/michaeljsmalley/dotfiles                     "
+"                                                                            "
+"                                                                            "
+" Sections:                                                                  "
+"   01. General ................. General Vim behavior                       "
+"   02. Events .................. General autocmd events                     "
+"   03. Theme/Colors ............ Colors, fonts, etc.                        "
+"   04. Vim UI .................. User interface behavior                    "
+"   05. Text Formatting/Layout .. Text, tab, indentation related             "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 01. General                                                                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 
-"Attempt to replace <esc> with jk
-inoremap jk <esc>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 02. Events                                                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 
-"set a persistent undo file
-"set undodir=~/.vim/undodir
-"set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+" In Makefiles DO NOT use spaces instead of tabs
+autocmd FileType make setlocal noexpandtab
+" In Ruby files, use 2 spaces instead of 4 for tabs
+autocmd FileType ruby setlocal sw=2 ts=2 sts=2
 
-"I will never use vim with this type of files
-set wildignore+=*.so,*.swp,*.zip,*.aux,*.pdf
+" Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode.
+set ofu=syntaxcomplete#Complete
 
-filetype indent plugin on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 03. Theme/Colors                                                           "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256              " enable 256-color mode.
+syntax enable             " enable syntax highlighting (previously syntax on).
+colorscheme molokai       " set colorscheme
 
-set nocompatible   " Disable vi-compatibility
-set hidden
-set number
-syntax on
+" Prettify JSON files
+autocmd BufRead,BufNewFile *.json set filetype=json
+autocmd Syntax json sou ~/.vim/syntax/json.vim
 
-set linebreak
-"set tabstop=4
-"set shiftwidth=4
+" Prettify Vagrantfile
+autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 
-"more history!
-set hi=150
+" Highlight characters that go over 80 columns
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
-"set switchbuf=usetab,newtab
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 04. Vim UI                                                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number                " show line numbers
+set cul                   " highlight current line
+set laststatus=2          " last window always has a statusline
+set nohlsearch            " Don't continue to highlight searched phrases.
+set incsearch             " But do highlight as you type your search.
+set ignorecase            " Make searches case-insensitive.
+set ruler                 " Always show info along bottom.
+set showmatch
+set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
 
-"Completion type
-set wildmode=longest,list
-set wildmenu
-
-"Right mouse button == menu - useful for spell check
-set mousemodel=popup
-
-"small w big W whaterver
-command W w
-
-set t_Co=256
-"colorscheme jellybeans
-set background=dark
-let g:solarized_termcolors=256 " color depth
-let g:solarized_termtrans=0 " 1|0 background transparent
-let g:solarized_bold=1 " 1|0 show bold fonts
-let g:solarized_italic=1 " 1|0 show italic fonts
-let g:solarized_underline=1 " 1|0 show underlines
-let g:solarized_contrast="normal" " normal|high|low contrast
-let g:solarized_visibility="low" " normal|high|low effect on whitespace characters
-colorscheme solarized
-
-"Backspace for everything
-"set backspace=indent,eol,start
-
-"Command \ to comment toggle
-map <D-\> \c<Space>
-
-"Mac keys stuff
-"set ruler
-
-vnoremap x "_x
-
-"let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-"let :g:SuperTabDefaultCompletionType = "<c-n>"
-set completeopt=longest,menuone,preview
-
-"better(?!) go to file
-"map gf <C-w>gf
-"map \d to black hole register
-map \d "_d
-
-"map \p to last yank paste
-map \p "0p
-map \P "0P
-
-"map \y to yank to system clipboard
-map \y "*y
-"set clipboard=unnamed
-
-"Maps for soft wraps
-map <UP> g<UP>
-map <Down> g<Down>
-vmap <UP> g<UP>
-vmap <Down> g<Down>
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-
-"map to select last pasted block
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-"Vim latex stuff
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-"set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex' "what the F* is plaintex?
-
-" Automatically cd into the directory that the file is in
-"autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-set autochdir
-
-" This shows what you are typing as a command.  
-set showcmd
-
-" Incremental searching 
-set incsearch
-
-"Python templates! :e new-file.py
-"autocmd! BufNewFile * silent! 0r ~/.vim/templates/tmpl.%:e
-
-"Undo tree - gundo
-"nnoremap <F6> :GundoToggle<CR>
-
-"force vertical diffs, filler is a default option
-set diffopt=filler,vertical
-
-"Set 'g/' to perform whole word search in normal mode
-function! SearchWord(word)
-    let @/ = '\<' . a:word . '\>'
-    normal n
-endfunction
-command! -nargs=1 SearchWord call SearchWord(<f-args>)
-nmap g/ :SearchWord
-
-"Set softwrap and spell to txt files
-autocmd BufRead,BufNewFile   *.txt setlocal wrap linebreak spell
-
-"Fancy status line with PowerLine
-"let g:Powerline_symbols = 'fancy'
-let g:Powerline_symbols = 'unicode'
-set laststatus=2
-"set fillchars+=stl:\ ,stlnc:\
-
-" Removes trailing spaces
-function! StripTrailingWhitespace()
-  normal mZ
-  %s/\s\+$//e
-  if line("'Z") != line(".")
-    echo "Stripped whitespace\n"
-  endif
-  normal `Z
-endfunction
-
-" Grep TODO tags
-function! TodoGrep()
-  execute "grep TODO -r %"
-  execute "cw"
-endfunction
-
-command Todo call TodoGrep()
-
-  "\ 'AcceptSelection("e")' 	: ['<c-cr>'],
-  "\ 'AcceptSelection("t")' 	: ['<cr>', '<c-m>'],
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtClearCache()' 		: ['<F6>']
-  \ }
-
-" It seems some python mode options have to be set here
-" as does not work on ftplugin/python
-" Disable pylint checking every save
-let g:pymode_lint_write = 0
-
-au BufNewFile,BufRead *.mkd set filetype=markdown
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 05. Text Formatting/Layout                                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autoindent            " auto-indent
+set tabstop=4             " tab spacing
+set softtabstop=4         " unify
+set shiftwidth=4          " indent/outdent by 4 columns
+set shiftround            " always indent/outdent to the nearest tabstop
+set expandtab             " use spaces instead of tabs
+set smarttab              " use tabs at the start of a line, spaces elsewhere
+set nowrap                " don't wrap text
