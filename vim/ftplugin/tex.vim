@@ -1,13 +1,12 @@
-"map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-		"\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
-
 " use sync tex
 let g:LatexBox_latexmk_options = '-synctex=1'
-let g:LatexBox_viewer = '~/bin/evince' 
-" enable folding...
-let g:LatexBox_Folding = 1
-" ... but do not fold the preamble
-let g:LatexBox_fold_preamble = 0
+if has("mac")
+	let g:LatexBox_viewer = 'open -a /Applications/Skim.app/'
+	map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+                \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
+elseif has("unix")
+	let g:LatexBox_viewer = '~/bin/evince' 
+endif
 
 setlocal tabstop=2
 setlocal shiftwidth=2
@@ -18,9 +17,6 @@ let g:surround_{char2nr('c')} = "\\\1command\1{\r}"
 
 "Make ctrlp work play nice with my latex folders
 let g:ctrlp_root_markers = ['*.latexmain']
-
-"Some text expansions
-iab TODO %TODO -
 
 " Some functions copyied from vim-latex
 let g:Tex_SmartKeyQuote = 1

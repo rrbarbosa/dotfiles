@@ -77,7 +77,7 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "let :g:SuperTabDefaultCompletionType = "<c-n>"
 set completeopt=longest,menuone,preview
 
-"better(?!) go to file
+"go to file in a new tab
 "map gf <C-w>gf
 "map \d to black hole register
 map \d "_d
@@ -106,7 +106,12 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
 "set grepprg=grep\ -nH\ $*
+"TODO: is this doing somehting?
 let g:tex_flavor='latex' "what the F* is plaintex?
+" enable folding...
+let g:LatexBox_Folding=1
+" ... but do not fold the preamble
+let g:LatexBox_fold_preamble = 0
 
 " Automatically cd into the directory that the file is in
 "autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
