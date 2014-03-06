@@ -13,6 +13,9 @@ execute pathogen#helptags()
 "Attempt to replace <esc> with jk
 inoremap jk <esc>
 
+"Destroy buffer but do not close window (split)
+nmap ,d :b#<bar>bd#<CR>
+
 "set a persistent undo file
 "set undodir=~/.vim/undodir
 "set undofile
