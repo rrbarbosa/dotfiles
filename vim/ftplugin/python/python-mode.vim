@@ -16,7 +16,7 @@ setlocal nowrap
 setlocal textwidth=0
 
 " Maps for rope commands - Gotta learn more!
-map <leader>j :RopeGotoDefinition<CR>
+nnoremap <buffer> <localleader>j :call pymode#rope#goto_definition()<CR>
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>79v.\+/
