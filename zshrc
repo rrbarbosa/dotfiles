@@ -28,7 +28,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git history-substring-search)
+plugins=(git history-substring-search) 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,3 +67,5 @@ if [ -f /usr/bin/vim ]; then
 fi
 export PYTHONPATH=~/workspace
 
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
