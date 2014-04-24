@@ -37,7 +37,7 @@ set linebreak
 "set shiftwidth=4
 
 "more history!
-set hi=150
+set hi=1000
 
 "set switchbuf=usetab,newtab
 
@@ -182,3 +182,5 @@ let g:ctrlp_prompt_mappings = {
 let g:pymode_lint_write = 0
 
 au BufNewFile,BufRead *.mkd set filetype=markdown
+
+set guifont=Inconsolata\ for\ Powerline\ 12
