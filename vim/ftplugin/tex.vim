@@ -6,6 +6,8 @@ if has("mac")
                 \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
 elseif has("unix")
 	let g:LatexBox_viewer = '~/bin/evince' 
+	map <silent> <Leader>ls :silent !~/bin/evince_forward_search \
+                \ LatexBox_GetOutputFile line('.') expand("%:p") <CR>
 endif
 
 setlocal tabstop=2
