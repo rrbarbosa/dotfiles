@@ -53,6 +53,11 @@ alias go='git checkout '
 #alias gx='gitx --all'
 alias got='git '
 alias get='git '
+case `uname` in
+  Linux)
+    alias open='xdg-open '
+    ;;
+esac
 
 # qfind - used to quickly find files that contain a string in a directory
 qfind () {
@@ -67,5 +72,5 @@ if [ -f /usr/bin/vim ]; then
 fi
 export PYTHONPATH=~/workspace
 
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+#bindkey "$terminfo[kcuu1]" history-substring-search-up
+#bindkey "$terminfo[kcud1]" history-substring-search-down
