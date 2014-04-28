@@ -112,7 +112,7 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 "TODO: is this doing somehting?
 let g:tex_flavor='latex' "what the F* is plaintex?
 " enable folding...
-let g:LatexBox_Folding=1
+"let g:LatexBox_Folding=1
 " ... but do not fold the preamble
 let g:LatexBox_fold_preamble = 0
 
