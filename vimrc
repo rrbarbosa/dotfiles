@@ -24,6 +24,7 @@ set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 "I will never use vim with this type of files
 set wildignore+=*.so,*.swp,*.zip,*.aux,*.pdf
+set wildignorecase "ignore case when completing filenames
 
 filetype indent plugin on
 
@@ -94,12 +95,16 @@ map \y "*y
 "set clipboard=unnamed
 
 "Maps for soft wraps
-map <UP> g<UP>
-map <Down> g<Down>
-vmap <UP> g<UP>
-vmap <Down> g<Down>
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+map k gk
+map j gj
+vmap k gk
+vmap j gj
+"map <UP> g<UP>
+"map <Down> g<Down>
+"vmap <UP> g<UP>
+"vmap <Down> g<Down>
+"inoremap <Down> <C-o>gj
+"inoremap <Up> <C-o>gk
 
 "map to select last pasted block
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -184,3 +189,12 @@ let g:pymode_lint_write = 0
 au BufNewFile,BufRead *.mkd set filetype=markdown
 
 set guifont=Inconsolata\ for\ Powerline\ 12
+
+"going to try to disable arrows
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+
+"do not increment octals (ctrl+a on 07 -> 08 and not 010)
+set nrformats-=octal

@@ -9,7 +9,7 @@
 
 dir=`pwd`                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc vimrc vim zshrc oh-my-zsh tmux.conf"    # list of files/folders to symlink in homedir
+files="inputrc bashrc vimrc vim zshrc oh-my-zsh tmux.conf"    # list of files/folders to symlink in homedir
 
 switch_to_zsh () {
     if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
