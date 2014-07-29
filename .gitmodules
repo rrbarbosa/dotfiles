@@ -10,3 +10,9 @@
 [submodule "vim/bundle/wiki"]
 	path = vim/bundle/wiki
 	url = https://github.com/chikamichi/mediawiki.vim.git
+[submodule "vim/bundle/vim-pandoc-syntax"]
+	path = vim/bundle/vim-pandoc-syntax
+	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
+[submodule "vim/bundle/vim-pandoc"]
+	path = vim/bundle/vim-pandoc
+	url = https://github.com/vim-pandoc/vim-pandoc.git
