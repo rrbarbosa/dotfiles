@@ -2,6 +2,8 @@
 set nocompatible              " be iMproved, required
 
 " Setting up Vundle - the vim plugin bundler
+" iCanHazVundle can be used later to call :PluginInstall
+" check: https://github.com/fisadev/fisa-vim-config/blob/master/.vimrc
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
@@ -16,7 +18,7 @@ endif
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -69,6 +71,11 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 """"" General vimrc
+
+if has("gui_running")
+  let g:airline_powerline_fonts = 1
+endif
+
 
 "Attempt to replace <esc> with jk
 inoremap jk <esc>
