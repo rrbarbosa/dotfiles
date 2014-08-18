@@ -95,6 +95,12 @@ alias cp="cp -i"
 alias scpresume="rsync --partial --progress --rsh=ssh"
 #alias mvim="mvim --remote-tab-silent"
 #alias ipython="ipython-2.6"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    alias open='xdg-open'
+elif [[ "$OSTYPE" == "darwin*" ]]; then
+    # ...
+    :
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
