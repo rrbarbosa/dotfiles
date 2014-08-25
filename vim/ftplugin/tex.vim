@@ -5,7 +5,7 @@ if has("mac")
 	map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
 elseif has("unix")
-	let g:LatexBox_viewer = '~/bin/evince' 
+	let g:LatexBox_viewer = '/usr/bin/evince' 
 	map <silent> <Leader>ls :silent !~/bin/evince_forward_search \
                 \ LatexBox_GetOutputFile line('.') expand("%:p") <CR>
 endif
