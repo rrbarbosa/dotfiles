@@ -101,8 +101,8 @@ set number
 syntax on
 
 set linebreak
-"set tabstop=4
-"set shiftwidth=4
+set tabstop=4
+set shiftwidth=4
 
 "more history!
 set hi=1000
@@ -265,3 +265,11 @@ noremap <Right> <nop>
 
 "do not increment octals (ctrl+a on 07 -> 08 and not 010)
 set nrformats-=octal
+
+if has("unix")
+  "linux copy and paste
+  vmap <C-c> "+yi
+  vmap <C-x> "+c
+  vmap <C-v> c<ESC>"+p
+  imap <C-v> <ESC>"+pa
+endif
