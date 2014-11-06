@@ -53,7 +53,7 @@ case "$TERM" in
 xterm*|rxvt*)
 	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
-    PS1="\[\e[00;32m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\w]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
+    PS1="\[\e[00;32m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
     ;;
 *)
     ;;
