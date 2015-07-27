@@ -112,6 +112,9 @@ fi
 #PATH=$PATH:$HOME/synergy/bin/
 #PATH=$PATH:/Users/barbosarr/workspace/argus-clients-latest/bin:/Users/barbosarr/workspace/argus-latest/bin
 #PATH=$PATH:/Users/barbosarr/local/bin:/Applications/sshfs/bin:/Users/barbosarr/bin
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	PATH=$PATH:/home/rafael/local/bin:/home/rafael/local/sbin
+fi
 
 export TERM=xterm-256color
 
@@ -148,4 +151,5 @@ _complete_ssh_hosts ()
 }
 complete -F _complete_ssh_hosts ssh
 
-
+#colors tmux
+alias tmux='TERM=xterm-256color tmux'
