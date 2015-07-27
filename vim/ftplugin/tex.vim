@@ -5,9 +5,11 @@ if has("mac")
 	map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
 elseif has("unix")
-	let g:LatexBox_viewer = '/usr/bin/evince' 
-	map <silent> <Leader>ls :silent !~/bin/evince_forward_search \
-                \ LatexBox_GetOutputFile line('.') expand("%:p") <CR>
+	function! SyncTexForward()
+		let execstr = 'silent !okular --unique '.LatexBox_GetOutputFile().'\#src:'.line('.').expand("%:p").' &'
+		exec execstr
+	endfunction
+	map <silent> <Leader>ls :call SyncTexForward()<CR>
 endif
 
 setlocal tabstop=2
