@@ -14,7 +14,6 @@ if !filereadable(vundle_readme)
     let iCanHazVundle=0
 endif
 
-
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -22,7 +21,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+"Plugin 'gmarik/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -54,6 +53,9 @@ Plugin 'L9'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
+"
+Plugin 'https://github.com/mephux/bro.vim'
+Plugin 'https://github.com/vim-scripts/pac.vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -75,7 +77,11 @@ filetype plugin indent on    " required
 if has("gui_running")
   let g:airline_powerline_fonts = 1
 endif
-
+"Fancy status line with PowerLine
+"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'unicode'
+set laststatus=2
+"set fillchars+=stl:\ ,stlnc:\
 
 "Attempt to replace <esc> with jk
 inoremap jk <esc>
@@ -95,7 +101,6 @@ set wildignorecase "ignore case when completing filenames
 
 filetype indent plugin on
 
-set nocompatible   " Disable vi-compatibility
 set hidden
 set number
 syntax on
@@ -137,9 +142,7 @@ colorscheme solarized
 "Command \ to comment toggle
 map <D-\> \c<Space>
 
-"Mac keys stuff
-"set ruler
-
+"do add to single character deletes to register
 vnoremap x "_x
 
 "let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
@@ -150,16 +153,13 @@ set completeopt=longest,menuone,preview
 
 "go to file in a new tab
 "map gf <C-w>gf
+"
 "map \d to black hole register
 map \d "_d
 
 "map \p to last yank paste
 map \p "0p
 map \P "0P
-
-"map \y to yank to system clipboard
-map \y "*y
-"set clipboard=unnamed
 
 "Maps for soft wraps
 map k gk
@@ -182,7 +182,7 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " program to always generate a file-name.
 "set grepprg=grep\ -nH\ $*
 "TODO: is this doing somehting?
-let g:tex_flavor='latex' "what the F* is plaintex?
+let g:tex_flavor='latex' "what is plaintex?
 " enable folding...
 "let g:LatexBox_Folding=1
 " ... but do not fold the preamble
@@ -198,12 +198,6 @@ set showcmd
 " Incremental searching 
 set incsearch
 
-"Python templates! :e new-file.py
-"autocmd! BufNewFile * silent! 0r ~/.vim/templates/tmpl.%:e
-
-"Undo tree - gundo
-"nnoremap <F6> :GundoToggle<CR>
-
 "force vertical diffs, filler is a default option
 set diffopt=filler,vertical
 
@@ -217,12 +211,6 @@ nmap g/ :SearchWord
 
 "Set softwrap and spell to txt files
 autocmd BufRead,BufNewFile   *.txt setlocal wrap linebreak spell
-
-"Fancy status line with PowerLine
-"let g:Powerline_symbols = 'fancy'
-let g:Powerline_symbols = 'unicode'
-set laststatus=2
-"set fillchars+=stl:\ ,stlnc:\
 
 " Removes trailing spaces
 function! StripTrailingWhitespace()
@@ -242,18 +230,16 @@ endfunction
 
 command Todo call TodoGrep()
 
-  "\ 'AcceptSelection("e")' 	: ['<c-cr>'],
-  "\ 'AcceptSelection("t")' 	: ['<cr>', '<c-m>'],
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtClearCache()' 		: ['<F6>']
-  \ }
-
 " It seems some python mode options have to be set here
 " as does not work on ftplugin/python
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope = 0
 
 au BufNewFile,BufRead *.mkd set filetype=markdown
+au BufNewFile,BufRead *.pac set filetype=pac
 
 set guifont=Inconsolata\ for\ Powerline\ 12
 
@@ -273,3 +259,6 @@ if has("unix")
   vmap <C-v> c<ESC>"+p
   imap <C-v> <ESC>"+pa
 endif
+
+"short command for openning a terminal
+cnoreabbrev gt !gnome-terminal
