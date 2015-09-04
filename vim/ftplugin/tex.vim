@@ -14,7 +14,10 @@ endif
 
 setlocal tabstop=2
 setlocal shiftwidth=2
-setlocal spell
+setlocal spell spelllang=en_us
+
+"somehow spell check is problematic without this
+syntax spell toplevel
 
 "Add vim-surrond for latex command, using char c
 let g:surround_{char2nr('c')} = "\\\1command\1{\r}"
