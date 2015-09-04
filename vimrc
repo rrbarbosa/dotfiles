@@ -41,6 +41,7 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator' "vim-tmux magic integration
+Plugin 'motus/pig.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
