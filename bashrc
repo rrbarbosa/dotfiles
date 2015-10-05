@@ -24,7 +24,8 @@ case "$TERM" in
 xterm*|rxvt*|screen*)
 	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
-    PS1="\[\e[00;32m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
+	PS1='\[\e[00;32m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W$(__git_ps1 " (%s)")]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
+	#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ 
     ;;
 *)
     ;;
@@ -122,3 +123,8 @@ complete -F _complete_ssh_hosts ssh
 
 #colors tmux
 alias tmux='TERM=xterm-256color tmux'
+
+#pig stuff
+export JAVA_HOME=/usr/java/jre1.8.0_25
+export PIG_HOME=/home/rafael/workspace/pig-0.15.0
+export PATH=$PATH:$PIG_HOME/bin
