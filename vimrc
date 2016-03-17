@@ -26,23 +26,29 @@ call vundle#begin()
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Gundo'
 Plugin 'sjl/gundo.vim.git'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'klen/python-mode'
-Plugin 'ervandew/supertab'
+Plugin 'mileszs/ack.vim'
+"Plugin 'airblade/vim-rooter'
+"Plugin 'ervandew/supertab' "testing youcompleteme
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'tpope/vim-surround'
-Plugin 'christoomey/vim-tmux-navigator' "vim-tmux magic integration
 Plugin 'motus/pig.vim'
 Plugin 'scrooloose/nerdtree'
+
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+
+
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
@@ -57,8 +63,8 @@ Plugin 'L9'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 "
-Plugin 'https://github.com/mephux/bro.vim'
-Plugin 'https://github.com/vim-scripts/pac.vim.git'
+"Plugin 'https://github.com/mephux/bro.vim'
+"Plugin 'https://github.com/vim-scripts/pac.vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -139,8 +145,8 @@ let g:solarized_contrast="normal" " normal|high|low contrast
 let g:solarized_visibility="low" " normal|high|low effect on whitespace characters
 colorscheme solarized
 
-"Backspace for everything
-"set backspace=indent,eol,start
+"Backspace for everything (needed on Mac)
+set backspace=indent,eol,start
 
 "Command \ to comment toggle
 map <D-\> \c<Space>
@@ -192,7 +198,7 @@ let g:tex_flavor='latex' "what is plaintex?
 let g:LatexBox_fold_preamble = 0
 
 " Automatically cd into the directory that the file is in
-"autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 set autochdir
 
 " This shows what you are typing as a command.  
@@ -244,7 +250,7 @@ let g:pymode_rope = 0
 au BufNewFile,BufRead *.mkd set filetype=markdown
 au BufNewFile,BufRead *.pac set filetype=pac
 
-set guifont=Inconsolata\ for\ Powerline\ 12
+set guifont=Inconsolata\ for\ Powerline:h16
 
 "going to try to disable arrows
 noremap <Up> <nop>
@@ -265,3 +271,19 @@ endif
 
 "short command for openning a terminal
 cnoreabbrev gt !gnome-terminal
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+"Syntastic stuff
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_flake8_args='--ignore=E731,E116,E114'
+
