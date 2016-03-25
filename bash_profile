@@ -11,8 +11,9 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
+export GOBIN=/Users/rafael/local/bin/
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-source .bashrc
+[[ -s ~/.bashrc ]] && source ~/.bashrc
 
