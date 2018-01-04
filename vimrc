@@ -27,27 +27,26 @@ call vundle#begin()
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-sensible'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Gundo'
-Plugin 'sjl/gundo.vim.git'
+Plugin 'Gundo' 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
-"Plugin 'airblade/vim-rooter'
-"Plugin 'ervandew/supertab' "testing youcompleteme
+Plugin 'rking/ag.vim'
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
 Plugin 'motus/pig.vim'
 Plugin 'scrooloose/nerdtree'
 
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-
+"Plugin 'Valloric/YouCompleteMe' 
+"Plugin 'davidhalter/jedi-vim'
 
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -83,9 +82,9 @@ filetype plugin indent on    " required
 
 """"" General vimrc
 
-if has("gui_running")
-  let g:airline_powerline_fonts = 1
-endif
+"if has("gui_running")
+let g:airline_powerline_fonts = 1
+"endif
 "Fancy status line with PowerLine
 "let g:Powerline_symbols = 'fancy'
 let g:Powerline_symbols = 'unicode'
@@ -98,9 +97,6 @@ inoremap jk <esc>
 "Destroy buffer but do not close window (split)
 nmap ,d :b#<bar>bd#<CR>
 
-"set a persistent undo file
-"set undodir=~/.vim/undodir
-"set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
@@ -108,11 +104,7 @@ set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 set wildignore+=*.so,*.swp,*.zip,*.aux,*.pdf
 set wildignorecase "ignore case when completing filenames
 
-filetype indent plugin on
-
 set hidden
-set number
-syntax on
 
 set linebreak
 set tabstop=4
@@ -123,33 +115,17 @@ set hi=1000
 
 "set switchbuf=usetab,newtab
 
-"Completion type
-set wildmode=longest,list
-set wildmenu
-
 "Right mouse button == menu - useful for spell check
 set mousemodel=popup
 
 "small w big W whaterver
 command W w
 
+" colors
 set t_Co=256
-"colorscheme jellybeans
-set background=dark
 let g:solarized_termcolors=256 " color depth
-let g:solarized_termtrans=0 " 1|0 background transparent
-let g:solarized_bold=1 " 1|0 show bold fonts
-let g:solarized_italic=1 " 1|0 show italic fonts
-let g:solarized_underline=1 " 1|0 show underlines
-let g:solarized_contrast="normal" " normal|high|low contrast
-let g:solarized_visibility="low" " normal|high|low effect on whitespace characters
+set background=dark
 colorscheme solarized
-
-"Backspace for everything (needed on Mac)
-set backspace=indent,eol,start
-
-"Command \ to comment toggle
-map <D-\> \c<Space>
 
 "do add to single character deletes to register
 vnoremap x "_x
@@ -158,7 +134,7 @@ vnoremap x "_x
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "let :g:SuperTabDefaultCompletionType = "<c-n>"
-set completeopt=longest,menuone,preview
+"set completeopt=longest,menuone,preview
 
 "go to file in a new tab
 "map gf <C-w>gf
@@ -198,14 +174,11 @@ let g:tex_flavor='latex' "what is plaintex?
 let g:LatexBox_fold_preamble = 0
 
 " Automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-set autochdir
+"autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+"set autochdir
 
 " This shows what you are typing as a command.  
 set showcmd
-
-" Incremental searching 
-set incsearch
 
 "force vertical diffs, filler is a default option
 set diffopt=filler,vertical
@@ -258,9 +231,6 @@ noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
 
-"do not increment octals (ctrl+a on 07 -> 08 and not 010)
-set nrformats-=octal
-
 if has("unix")
   "linux copy and paste
   vmap <C-c> "+yi
@@ -271,10 +241,6 @@ endif
 
 "short command for openning a terminal
 cnoreabbrev gt !gnome-terminal
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
 
 "Syntastic stuff
 set statusline+=%#warningmsg#
@@ -287,3 +253,24 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args='--ignore=E731,E116,E114'
 
+let g:gundo_prefer_python3 = 1
+
+" Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+set completeopt-=preview
+" complete as much as possible, then a list and then cycle
+" http://stackoverflow.com/questions/526858/how-do-i-make-vim-do-normal-bash-like-tab-completion-for-file-names
+set wildmode=longest,list,full
+set wildignorecase "ignore case when completing filenames
+
+set number

@@ -19,6 +19,8 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
 xterm*|rxvt*|screen*)
@@ -31,10 +33,8 @@ xterm*|rxvt*|screen*)
     ;;
 esac
 
-#New bash separator
-if [ -f "$HOME/.bash_ps1" ]; then
-. "$HOME/.bash_ps1"
-fi
+
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -94,6 +94,7 @@ export LC_ALL=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
+export EDITOR=vim
 export SVN_EDITOR=$EDITOR
 
 #ctrl+s to forward-search-history - makes letter u stop working 
@@ -126,4 +127,15 @@ alias tmux='TERM=xterm-256color tmux'
 export JAVA_HOME=/usr/java/jre1.8.0_25
 export PIG_HOME=/home/rafael/workspace/pig-0.15.0
 export PATH=$PATH:$PIG_HOME/bin
+export HOMEBREW_GITHUB_API_TOKEN=8e2d96e672028482d3bb17a59f397856cfbaa9c7
 
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export AIRFLOW_HOME="~/.config/airflow"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
