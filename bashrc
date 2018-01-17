@@ -34,8 +34,6 @@ xterm*|rxvt*|screen*)
 esac
 
 
-
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -122,20 +120,5 @@ complete -F _complete_ssh_hosts ssh
 
 #colors tmux
 alias tmux='TERM=xterm-256color tmux'
-
-#pig stuff
-export JAVA_HOME=/usr/java/jre1.8.0_25
-export PIG_HOME=/home/rafael/workspace/pig-0.15.0
-export PATH=$PATH:$PIG_HOME/bin
-export HOMEBREW_GITHUB_API_TOKEN=8e2d96e672028482d3bb17a59f397856cfbaa9c7
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export AIRFLOW_HOME="~/.config/airflow"
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
