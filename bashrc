@@ -19,7 +19,9 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
+	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+fi
 
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
@@ -75,13 +77,10 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
-#PATH=$PATH:$HOME/synergy/bin/
-#PATH=$PATH:/Users/barbosarr/workspace/argus-clients-latest/bin:/Users/barbosarr/workspace/argus-latest/bin
-#PATH=$PATH:/Users/barbosarr/local/bin:/Applications/sshfs/bin:/Users/barbosarr/bin
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	PATH=$PATH:/home/rafael/local/bin:/home/rafael/local/sbin
 fi
@@ -94,29 +93,6 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 export EDITOR=vim
 export SVN_EDITOR=$EDITOR
-
-#ctrl+s to forward-search-history - makes letter u stop working 
-#stty stop udef
-
-#ssh autocomple
-_complete_ssh_hosts ()
-{
-        COMPREPLY=()
-        cur="${COMP_WORDS[COMP_CWORD]}"
-        comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
-                        cut -f 1 -d ' ' | \
-                        sed -e s/,.*//g | \
-                        grep -v ^# | \
-                        uniq | \
-                        grep -v "\[" ;
-                cat ~/.ssh/config | \
-                        grep "^Host " | \
-                        awk '{print $2}'
-                `
-        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
-        return 0
-}
-complete -F _complete_ssh_hosts ssh
 
 #colors tmux
 alias tmux='TERM=xterm-256color tmux'
