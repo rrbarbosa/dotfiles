@@ -51,4 +51,10 @@ for file in $files; do
     echo
 done
 
-#switch_to_zsh
+# neovim
+echo "Moving any existing dotfiles from ~ to $olddir"
+echo ~/.config/nvim "->" $olddir/
+mv -f ~/.config/nvim $olddir/
+echo "Creating symlink to nvim in .config directory."
+ln -s $dir/nvim ~/.config/nvim
+echo
