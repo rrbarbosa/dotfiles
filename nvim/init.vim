@@ -54,7 +54,7 @@ let g:ale_linters = {
 
 " colors
 "set t_Co=256
-"let g:solarized_termcolors=256 " color depth
+let g:solarized_termcolors=256 " color depth
 set background=dark
 colorscheme solarized
 

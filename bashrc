@@ -19,17 +19,22 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
-	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+# if fails, try: xcode-select --install
+if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
+	. /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+fi
+if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ]; then
+	. /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 fi
 
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
 xterm*|rxvt*|screen*)
 	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+	# Vanilla
 	#PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
+	# will break if the source git stuff above failed
 	PS1='\[\e[00;32m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W$(__git_ps1 " (%s)")]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
-	#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ 
     ;;
 *)
     ;;
