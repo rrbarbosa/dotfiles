@@ -26,10 +26,4 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 [[ -s ~/.bashrc ]] && source ~/.bashrc
 
-
-export PATH=~/.local/bin:$PATH
-eval "$(_3DHUBS_COMPLETE=source 3dhubs)"
-export PATH=~/.local/bin:$PATH
-eval "$(_3DHUBS_COMPLETE=source 3dhubs)"
-
 alias zcat="gunzip -c"
