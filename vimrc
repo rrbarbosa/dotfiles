@@ -31,7 +31,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Gundo' 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 Plugin 'rking/ag.vim'
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
@@ -68,6 +69,7 @@ Plugin 'L9'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+syntax on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
