@@ -126,7 +126,7 @@ command W w
 " colors
 set t_Co=256
 let g:solarized_termcolors=256 " color depth
-set background=dark
+set background=light
 colorscheme solarized
 
 "do add to single character deletes to register
@@ -167,7 +167,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
-"set grepprg=grep\ -nH\ $*
+" set grepprg=grep\ -nH\ $*
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 "TODO: is this doing somehting?
 let g:tex_flavor='latex' "what is plaintex?
 " enable folding...

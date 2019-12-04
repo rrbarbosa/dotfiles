@@ -14,11 +14,6 @@ export HISTCONTROL=ignoreboth
 # update the values of LINES and COLUMNS.
 #shopt -s checkwinsize
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-	debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # if fails, try: xcode-select --install
 if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
 	. /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
@@ -31,15 +26,17 @@ fi
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
 xterm*|rxvt*|screen*)
-	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-	# only show hostname if remote
-	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		host="@\h"
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		PS1="\\$> \[$(tput sgr0)\]"
+	else
+		PROMPT_COMMAND+='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+		# only show hostname if remote
+		if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+			host="@\h"
+		fi
+		# will break if the source git stuff above failed
+		PS1='\[\e[00;32m\]\u${host}\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W$(__git_ps1 " (%s)")]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
 	fi
-	# Vanilla
-	#PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
-	# will break if the source git stuff above failed
-	PS1='\[\e[00;32m\]\u${host}\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;36m\][\W$(__git_ps1 " (%s)")]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
     ;;
 *)
     ;;
@@ -108,3 +105,34 @@ export SVN_EDITOR=$EDITOR
 alias tmux='TERM=xterm-256color tmux'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Alias aadlogin
+if command -v docker &> /dev/null; then
+	export AWS_DEFAULT_REGION=eu-west-1
+	export AWS_REGION=eu-west-1
+	alias aadlogin='docker run -ti -v ~/.aws:/root/.aws dtjohnson/aws-azure-login'
+fi
+if which pyenv-virtualenv-init > /dev/null; then
+	eval "$(pyenv virtualenv-init -)";
+fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+# Export DBT_PASSWORD to redshift db
+alias pwd_redshift="op get item cw6djckxcneu5kjo7b4kdpkgvm | jq -r '.details.fields[] | select(.designation==\"password\") | .value'"
+
+export PIP_REQUIRE_VIRTUALENV=true
+
+# local toolbox
+alias ltb='/Users/rafael/go/src/gitlab.com/new10/toolchain/toolbox/bin/toolbox-darwin-amd64'
+
+# show aws profile in status bar
+PROMPT_COMMAND+='iterm2_set_user_var aws_profile "$AWS_PROFILE";'
