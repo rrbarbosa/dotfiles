@@ -9,19 +9,7 @@
 
 dir=`pwd`                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-#files="inputrc bashrc vimrc vim zshrc oh-my-zsh tmux.conf"    # list of files/folders to symlink in homedir
-files="inputrc bashrc bash_profile vimrc vim tmux.conf"    # list of files/folders to symlink in homedir
-
-switch_to_zsh () {
-    if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
-	if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-	    chsh -s $(which zsh)
-	fi
-    else
-	echo "Warning: zsh not installed"
-	exit
-    fi
-}
+files="inputrc bashrc bash_profile gitconfig vimrc vim tmux.conf"    # list of files/folders to symlink in homedir
 
 ##########
 
