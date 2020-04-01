@@ -10,19 +10,6 @@ export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-#shopt -s checkwinsize
-
-# if fails, try: xcode-select --install
-if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
-	. /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
-fi
-if [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ]; then
-	. /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
-fi
-
-
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
 xterm*|rxvt*|screen*)
@@ -41,16 +28,6 @@ xterm*|rxvt*|screen*)
 *)
     ;;
 esac
-
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ] && [ -x /usr/bin/dircolors ]; then
@@ -71,9 +48,6 @@ alias l='ls -CF'
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-alias scpresume="rsync --partial --progress --rsh=ssh"
-#alias mvim="mvim --remote-tab-silent"
-#alias ipython="ipython-2.6"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     alias open='xdg-open'
 elif [[ "$OSTYPE" == "darwin*" ]]; then
@@ -88,10 +62,6 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	PATH=$PATH:/home/rafael/local/bin:/home/rafael/local/sbin
-fi
-
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -104,35 +74,10 @@ export SVN_EDITOR=$EDITOR
 #colors tmux
 alias tmux='TERM=xterm-256color tmux'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Alias aadlogin
-if command -v docker &> /dev/null; then
-	export AWS_DEFAULT_REGION=eu-west-1
-	export AWS_REGION=eu-west-1
-	alias aadlogin='docker run -ti -v ~/.aws:/root/.aws dtjohnson/aws-azure-login'
-fi
-if which pyenv-virtualenv-init > /dev/null; then
-	eval "$(pyenv virtualenv-init -)";
-fi
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
-
-# Export DBT_PASSWORD to redshift db
-alias pwd_redshift="op get item cw6djckxcneu5kjo7b4kdpkgvm | jq -r '.details.fields[] | select(.designation==\"password\") | .value'"
-
 export PIP_REQUIRE_VIRTUALENV=true
-
-# local toolbox
-alias ltb='/Users/rafael/go/src/gitlab.com/new10/toolchain/toolbox/bin/toolbox-darwin-amd64'
 
 # show aws profile in status bar
 PROMPT_COMMAND+='iterm2_set_user_var aws_profile "$AWS_PROFILE";'
+
+# Created by `userpath` on 2020-03-25 14:04:59
+export PATH="$PATH:/Users/rafael/.local/bin"
