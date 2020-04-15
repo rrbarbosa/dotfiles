@@ -2,7 +2,15 @@
 
 alias zcat="gunzip -c"
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# enable iterm2 itegration and set status variables
+if [ -s ~/.iterm2_shell_integration.bash ]; then
+	function iterm2_print_user_vars() {
+		iterm2_set_user_var aws_profile "$AWS_PROFILE"
+		iterm2_set_user_var kube_context "$(kubectl config current-context)"
+		iterm2_set_user_var kube_ns "$(kubens --current)"
+	}
+	source ~/.iterm2_shell_integration.bash
+fi
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"

@@ -76,8 +76,5 @@ alias tmux='TERM=xterm-256color tmux'
 
 export PIP_REQUIRE_VIRTUALENV=true
 
-# show aws profile in status bar
-PROMPT_COMMAND+='iterm2_set_user_var aws_profile "$AWS_PROFILE";'
-
 # Created by `userpath` on 2020-03-25 14:04:59
 export PATH="$PATH:/Users/rafael/.local/bin"
