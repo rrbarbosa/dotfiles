@@ -69,7 +69,8 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 export EDITOR=vim
-export SVN_EDITOR=$EDITOR
+# Stop the annoying: default ... shell ... zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #colors tmux
 alias tmux='TERM=xterm-256color tmux'
