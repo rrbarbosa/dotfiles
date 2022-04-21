@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -30,16 +31,16 @@ xterm*|rxvt*|screen*)
 esac
 
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ] && [ -x /usr/bin/dircolors ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
+#if [ "$TERM" != "dumb" ] && [ -x /usr/bin/dircolors ]; then
+#    eval "`dircolors -b`"
+#    alias ls='ls --color=auto'
+#    #alias dir='ls --color=auto --format=vertical'
+#    #alias vdir='ls --color=auto --format=long'
 
-    alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
-fi
+#    alias grep='grep --color=auto'
+#    #alias fgrep='fgrep --color=auto'
+#    #alias egrep='egrep --color=auto'
+#fi
 
 # some aliases
 alias ll='ls -lh'
@@ -48,19 +49,6 @@ alias l='ls -CF'
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    alias open='xdg-open'
-elif [[ "$OSTYPE" == "darwin*" ]]; then
-    # ...
-    :
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -77,5 +65,12 @@ alias tmux='TERM=xterm-256color tmux'
 
 export PIP_REQUIRE_VIRTUALENV=true
 
-# Created by `userpath` on 2020-03-25 14:04:59
-export PATH="$PATH:/Users/rafael/.local/bin"
+# Ruby for wetransfer
+# eval "$(rbenv init -)"
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+# export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
+# export PATH="/opt/homebrew/opt/imagemagick@6/bin:$PATH"
+# export PATH="/Users/rafael.barbosa/.gem/ruby/2.7.0/bin:$PATH"
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
