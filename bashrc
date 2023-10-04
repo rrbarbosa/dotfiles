@@ -9,6 +9,7 @@
 export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
+export HISTSIZE=50000
 
 # If this is an xterm set the title to user@host:dir and set PS1
 case "$TERM" in
@@ -55,9 +56,9 @@ elif [[ "$OSTYPE" == "darwin*" ]]; then
     :
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+
+# brew and completion
+[[ -s /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
@@ -77,5 +78,3 @@ alias tmux='TERM=xterm-256color tmux'
 
 export PIP_REQUIRE_VIRTUALENV=true
 
-# Created by `userpath` on 2020-03-25 14:04:59
-export PATH="$PATH:/Users/rafael/.local/bin"

@@ -1,15 +1,17 @@
 [alias] 
 	br = branch
 	branch-name = "rev-parse --abbrev-ref HEAD"
-	# create branch
-	chb = checkout -b
 	c = commit
 	cam = commit --all -m
 	cm = commit -m
 	co = checkout
 	dc = diff --cached
+	fup = up --force-with-lease
 	# list alias
 	la = "!git config -l | grep alias | cut -c 7-"
+	st = status
+	sw = switch
 	# push create remote branch if needed
 	up = "!git push -u origin $(git branch-name)"
+	swm = sw master
 
